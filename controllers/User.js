@@ -88,9 +88,9 @@ const setUserInfo = async (req, res) => {
     try {
       const data = req.body;
       await transporter.sendMail({
-        from: 'ngothibaolinhnm2003@gmail.com',
-        to:'ngothibaolinhnm2003@gmail.com',
-        subject:'Ứng dụng quản lý Phòng mạch tư gửi lại mật khẩu',
+        from: '21522332@gm.uit.edu.com',
+        to:'21522332@gm.uit.edu.com',
+        subject:'Ứng dụng Quản lý khách sạn gửi lại mật khẩu',
         text:'111111',
       });
       console.log('Email sent successfully');
