@@ -2,12 +2,10 @@ const express = require("express");
 const router = express.Router();
 
 const {
-  
   addDocument,
   deleteDocument,
   updateDocument,
   getAllDocuments,
-  
 } = require("../controllers/Schedule");
   //user
 const {
@@ -77,4 +75,46 @@ router.post("/DiscountManagement/add", addDiscount);
 router.put("/DiscountManagement/update/:discountId", updateDiscount);
 router.delete("/DiscountManagement/delete/:discountId", deleteDiscount);
 router.get("/DiscountManagement/Discounts", getDiscountsBySearch);
+//Bill
+const {
+  getAllBills,
+  addBill,
+  updateBill,
+  deleteBill,
+  getBillsBySearch,
+} = require("../controllers/Bill");
+//Bill
+router.get("/BillManagement/getBills", getAllBills);
+router.post("/BillManagement/add", addBill);
+router.put("/BillManagement/update/:billId", updateBill);
+router.delete("/BillManagement/delete/:billId", deleteBill);
+router.get("/BillManagement/Bills", getBillsBySearch);
+
+//KindOfRoom 
+const {
+  getAllKindOfRoom,
+  addKindOfRoom,
+  updateKindOfRoom,
+  deleteKindOfRoom,
+} = require("../controllers/Rooms");
+//KindOfRoom 
+router.get("/KindOfRoom/getKindOfRoom", getAllKindOfRoom);
+router.post("/KindOfRoom/add", addKindOfRoom);
+router.put("/KindOfRoom/update/:kindofroomId", updateKindOfRoom);
+router.delete("/KindOfRoom/delete/:kindofroomId", deleteKindOfRoom );
+
+
+//Floor 
+const {
+  getAllFloors,
+  addFloor,
+  updateFloor,
+  deleteFloor,
+} = require("../controllers/Floor");
+//Floor 
+router.get("/Floor/getFloors", getAllFloors);
+router.post("/Floor/add", addFloor);
+router.put("/Floor/update/:floorId", updateFloor);
+router.delete("/Floor/delete/:floorId", deleteFloor);
+
 module.exports = router;
