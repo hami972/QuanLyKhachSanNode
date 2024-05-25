@@ -117,4 +117,18 @@ router.post("/Floor/add", addFloor);
 router.put("/Floor/update/:floorId", updateFloor);
 router.delete("/Floor/delete/:floorId", deleteFloor);
 
+
+//BookedRoom
+const {
+  getAllBookedRoom,
+  addBookedRoom,
+  updateBookedRoom,
+  deleteBookedRoom,
+} = require("../controllers/Room");
+//BookedRoom 
+router.get("/BookedRoom/getBookedRoom", getAllBookedRoom);
+router.post("/BookedRoom/add", addBookedRoom);
+router.put("/BookedRoom/update/:bookedRoomId", updateBookedRoom);
+router.delete("/BookedRoom/delete/:bookedRoomId", deleteBookedRoom);
+
 module.exports = router;
