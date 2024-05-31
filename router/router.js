@@ -131,4 +131,30 @@ router.post("/BookedRoom/add", addBookedRoom);
 router.put("/BookedRoom/update/:bookedRoomId", updateBookedRoom);
 router.delete("/BookedRoom/delete/:bookedRoomId", deleteBookedRoom);
 
+//Review
+const {
+  getAllReview,
+  addReview,
+  updateReview,
+  deleteReview,
+} = require("../controllers/Review");
+//Review 
+router.get("/Review/getReview", getAllReview);
+router.post("/Review/add", addReview);
+router.put("/Review/update/:reviewId", updateReview);
+router.delete("/Review/delete/:reviewId", deleteReview);
+
+const {
+  getMaterialUsedBySearch,
+  getMaterialsUsed,
+  updateMaterialUsed,
+  deleteMaterialUsed,
+  addMaterialUsed,
+} = require("../controllers/MaterialUsed");
+//materialused
+router.get("/MaterialUsed/get", getMaterialsUsed);
+router.get("/MaterialUsed/search", getMaterialUsedBySearch);
+router.post("/MaterialUsed/add", addMaterialUsed);
+router.put("/MaterialUsed/update/:Id", updateMaterialUsed);
+router.delete("/MaterialUsed/delete/:Id", deleteMaterialUsed);
 module.exports = router;
