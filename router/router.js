@@ -7,19 +7,19 @@ const {
   updateDocument,
   getAllDocuments,
 } = require("../controllers/Schedule");
-  //user
+//user
 const {
-    setUserInfo,
-    addUser,
-    SignIn,
-    sendEmail,
-    checkUserName,
-    updateUser,
-    getUserData,
-    findStaffbymaNV,
-    deleteUser,
-  } = require("../controllers/User");
-  //user
+  setUserInfo,
+  addUser,
+  SignIn,
+  sendEmail,
+  checkUserName,
+  updateUser,
+  getUserData,
+  findStaffbymaNV,
+  deleteUser,
+} = require("../controllers/User");
+//user
 router.put("/setUserInfo/:userId", setUserInfo);
 router.post("/addUser", addUser);
 router.post("/sendEmail", sendEmail);
@@ -101,7 +101,7 @@ const {
 router.get("/KindOfRoom/getKindOfRoom", getAllKindOfRoom);
 router.post("/KindOfRoom/add", addKindOfRoom);
 router.put("/KindOfRoom/update/:kindofroomId", updateKindOfRoom);
-router.delete("/KindOfRoom/delete/:kindofroomId", deleteKindOfRoom );
+router.delete("/KindOfRoom/delete/:kindofroomId", deleteKindOfRoom);
 
 
 //Floor 
@@ -144,6 +144,7 @@ router.post("/Review/add", addReview);
 router.put("/Review/update/:reviewId", updateReview);
 router.delete("/Review/delete/:reviewId", deleteReview);
 
+//materialused
 const {
   getMaterialUsedBySearch,
   getMaterialsUsed,
@@ -151,10 +152,14 @@ const {
   deleteMaterialUsed,
   addMaterialUsed,
 } = require("../controllers/MaterialUsed");
-//materialused
 router.get("/MaterialUsed/get", getMaterialsUsed);
 router.get("/MaterialUsed/search", getMaterialUsedBySearch);
 router.post("/MaterialUsed/add", addMaterialUsed);
 router.put("/MaterialUsed/update/:Id", updateMaterialUsed);
 router.delete("/MaterialUsed/delete/:Id", deleteMaterialUsed);
+
+//Material
+const { addMaterial } = require("../controllers/Material");
+router.post("/Material/add", addMaterial)
+
 module.exports = router;
