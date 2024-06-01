@@ -162,4 +162,17 @@ router.delete("/MaterialUsed/delete/:Id", deleteMaterialUsed);
 const { addMaterial } = require("../controllers/Material");
 router.post("/Material/add", addMaterial)
 
+
+const {
+  getAllWashingMachine,
+  addWashingMachine,
+  updateWashingMachine,
+  deleteWashingMachine,
+} = require("../controllers/WashingMachine");
+//washignmachine
+router.get("/WashingMachine/getWashingMachine", getAllWashingMachine);
+// router.get("/WashingMachine/add", addWashingMachine); // <- POST
+router.post("/WashingMachine/add", addWashingMachine); 
+router.put("/WashingMachine/update/:Id", updateWashingMachine);
+router.delete("/WashingMachine/delete/:Id", deleteWashingMachine);
 module.exports = router;
