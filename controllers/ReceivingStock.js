@@ -2,9 +2,9 @@ const { getFirestore, collection, getDocs, addDoc, updateDoc, doc, setDoc, getDo
 const { firebase } = require('../config')
 const firestore = getFirestore(firebase);
 
-const addMaterial = async (req, res) => {
+const addReceivingStock = async (req, res) => {
     try {
-        const myCollection = collection(firestore, 'CSVC');
+        const myCollection = collection(firestore, 'NhapKho');
         const docRef = await addDoc(myCollection, req.body);
         console.log("Document csvc successfully add!");
         res.send({ success: false, message: 'CSVC added successfully', docId: docRef.id });
@@ -14,8 +14,8 @@ const addMaterial = async (req, res) => {
     }
 };
 
-const getAllMaterials = async (req, res) => {
-    const myCollection = collection(firestore, 'CSVC');
+const getReceivingStock = async (req, res) => {
+    const myCollection = collection(firestore, 'NhapKho');
     try {
         const querySnapshot = await getDocs(myCollection);
         const list = querySnapshot.docs.map((doc) => {
@@ -23,7 +23,7 @@ const getAllMaterials = async (req, res) => {
             const docId = doc.id;
             return { ...data, Id: docId };
         });
-        const newList = list.sort((a, b) => a.maCSVC.localeCompare(b.maCSVC));
+        const newList = list.sort((a, b) => a.ngayNhap.localeCompare(b.ngayNhap));
         res.json({ success: true, materials: newList });
     } catch (error) {
         res
@@ -37,21 +37,4 @@ const getAllMaterials = async (req, res) => {
     }
 };
 
-const updateMaterial = async (req, res) => {
-    try {
-        const myCollection = collection(firestore, 'CSVC');
-        const docRef1 = doc(myCollection, req.params.Id);
-        let data = req.body;
-        await updateDoc(docRef1, data);
-        console.log("Document branch successfully updated!");
-        res.send({ success: true, message: "Document successfully updated!" });
-    } catch (error) {
-        console.error("Error updating branch document: ", error);
-        res.status(500).json({
-            success: false,
-            message: "something went wrong when update document",
-        });
-    }
-};
-
-module.exports = { addMaterial, getAllMaterials, updateMaterial }
+module.exports = { addReceivingStock, getReceivingStock }
