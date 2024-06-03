@@ -10,8 +10,8 @@ const app = express();
 app.use(cors());
 
 // Configure body-parser to handle larger payloads
-app.use(bodyParser.json({ limit: '50gb' }));
-app.use(bodyParser.urlencoded({ limit: '50gb', extended: true }));
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 // Set up Multer for file uploads
 const upload = multer({ dest: 'uploads/' });
