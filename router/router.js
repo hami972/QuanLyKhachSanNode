@@ -117,7 +117,6 @@ router.post("/Floor/add", addFloor);
 router.put("/Floor/update/:floorId", updateFloor);
 router.delete("/Floor/delete/:floorId", deleteFloor);
 
-
 //BookedRoom
 const {
   getAllBookedRoom,
@@ -186,4 +185,15 @@ router.get("/WashingMachine/getWashingMachine", getAllWashingMachine);
 router.post("/WashingMachine/add", addWashingMachine);
 router.put("/WashingMachine/update/:Id", updateWashingMachine);
 router.delete("/WashingMachine/delete/:Id", deleteWashingMachine);
+
+//Block
+const {
+  getAllBlocks,
+  addBlock,
+  updateBlock,
+} = require("../controllers/Block");
+router.get("/Block/get", getAllBlocks);
+router.post("/Block/add", addBlock);
+router.put("/Block/update/:Id", updateBlock);
+
 module.exports = router;
