@@ -191,9 +191,11 @@ const {
   getAllBlocks,
   addBlock,
   updateBlock,
+  deleteBlock
 } = require("../controllers/Block");
 router.get("/Block/get", getAllBlocks);
 router.post("/Block/add", addBlock);
-router.put("/Block/update/:Id", updateBlock);
+router.put("/Block/update/:blockId", updateBlock);
+router.delete("/Block/delete/:blockId", deleteBlock);
 
 module.exports = router;

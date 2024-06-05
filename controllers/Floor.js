@@ -70,7 +70,7 @@ const updateFloor = async (req, res) => {
 
 const deleteFloor = async (req, res) => {
   try {
-    const documentRef = doc(firestore, "Tang", req.params.kingofroomId);
+    const documentRef = doc(firestore, 'Tang', req.params.kingofroomId);
     await deleteDoc(documentRef);
     console.log("Document floor deleted successfully.");
     res.send({ success: true, message: "Document successfully updated!" });

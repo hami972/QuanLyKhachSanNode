@@ -23,7 +23,7 @@ const getAllBlocks = async (req, res) => {
             const docId = doc.id;
             return { ...data, Id: docId };
         });
-        const newList = list.sort((a, b) => a.maCSVC.localeCompare(b.maCSVC));
+        const newList = list.sort((a, b) => a.maToa.localeCompare(b.maToa));
         res.json({ success: true, materials: newList });
     } catch (error) {
         res
@@ -40,7 +40,7 @@ const getAllBlocks = async (req, res) => {
 const updateBlock = async (req, res) => {
     try {
         const myCollection = collection(firestore, 'Toa');
-        const docRef1 = doc(myCollection, req.params.Id);
+        const docRef1 = doc(myCollection, req.params.blockId);
         let data = req.body;
         await updateDoc(docRef1, data);
         console.log("Document branch successfully updated!");
@@ -54,4 +54,19 @@ const updateBlock = async (req, res) => {
     }
 };
 
-module.exports = { addBlock, getAllBlocks, updateBlock }
+const deleteBlock = async (req, res) => {
+    try {
+        const documentRef = doc(firestore, 'Toa', req.params.blockId);
+        await deleteDoc(documentRef);
+        console.log("Document branch deleted successfully.");
+        res.send({ success: true, message: "Document successfully updated!" });
+    } catch (error) {
+        console.log("Error deleting branch document:", error);
+        res.status(500).json({
+            success: false,
+            message: "something went wrong when delete document",
+        });
+    }
+};
+
+module.exports = { addBlock, getAllBlocks, updateBlock, deleteBlock }
