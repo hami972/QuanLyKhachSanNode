@@ -174,14 +174,15 @@ router.post("/DamagedMaterial/add", addDamagedMaterial)
 router.get("/DamagedMaterial/get", getDamagedMaterial);
 
 const {
-  getAllWashingMachine,
+  getWashingMachine,
   addWashingMachine,
   updateWashingMachine,
   deleteWashingMachine,
+  getWashingMachineBySearch,
 } = require("../controllers/WashingMachine");
 //washignmachine
-router.get("/WashingMachine/getWashingMachine", getAllWashingMachine);
-// router.get("/WashingMachine/add", addWashingMachine); // <- POST
+router.get("/WashingMachine/get", getWashingMachine);
+router.get("/WashingMachine/search", getWashingMachineBySearch);
 router.post("/WashingMachine/add", addWashingMachine);
 router.put("/WashingMachine/update/:Id", updateWashingMachine);
 router.delete("/WashingMachine/delete/:Id", deleteWashingMachine);
