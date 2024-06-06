@@ -103,7 +103,7 @@ const getBookedRoomBySearch = async (req, res) => {
         tenKhachHang === "" ||
         normalizeText(bookedRoom.tenKhachHang).includes(normalizeText(tenKhachHang));
       const matchCCCD = CCCD == "" || CCCD == bookedRoom.CCCD;
-      const matchSDT = SDT == "" || SDT == bookedRoom.SDT;
+      const matchSDT = SDT == "" || SDT == bookedRoom.soDienThoai;
       return (
         matchTenKhachHang &&
         matchCCCD &&
@@ -113,7 +113,7 @@ const getBookedRoomBySearch = async (req, res) => {
     const sortList = searchResults.sort((a, b) =>
       a.ngayBatDau.localeCompare(b.ngayBatDau)
     );
-    res.json({ success: true, bills: sortList });
+    res.json({ success: true, list: sortList });
   } catch (error) {
     res.status(500).json({
       success: false,
