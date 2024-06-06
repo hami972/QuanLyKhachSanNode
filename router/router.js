@@ -123,12 +123,13 @@ const {
   addBookedRoom,
   updateBookedRoom,
   deleteBookedRoom,
-} = require("../controllers/Room");
-//BookedRoom 
+  getBookedRoomBySearch
+} = require("../controllers/BookedRoom");
 router.get("/BookedRoom/getBookedRoom", getAllBookedRoom);
 router.post("/BookedRoom/add", addBookedRoom);
 router.put("/BookedRoom/update/:bookedRoomId", updateBookedRoom);
 router.delete("/BookedRoom/delete/:bookedRoomId", deleteBookedRoom);
+router.get("/BookedRoom/bookedRoom", getBookedRoomBySearch);
 
 //Review
 const {
