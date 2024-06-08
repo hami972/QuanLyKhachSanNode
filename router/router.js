@@ -159,15 +159,21 @@ router.put("/MaterialUsed/update/:Id", updateMaterialUsed);
 router.delete("/MaterialUsed/delete/:Id", deleteMaterialUsed);
 
 // Material
-const { addMaterial, getAllMaterials, updateMaterial } = require("../controllers/Material");
+const { addMaterial, getAllMaterials, updateMaterial, getMaterialsBySearch, deleteMaterial } = require("../controllers/Material");
 router.post("/Material/add", addMaterial)
 router.get("/Material/get", getAllMaterials);
 router.put("/Material/update/:Id", updateMaterial);
+router.delete("/Material/delete/:Id", deleteMaterial);
+router.get("/Material/search", getMaterialsBySearch);
 
 // Receiving Stock
-const { addReceivingStock, getReceivingStock } = require("../controllers/ReceivingStock");
+const { addReceivingStock, getReceivingStock, getReceivingStockBySearch, deleteReceivingStock, updateReceivingStock }
+  = require("../controllers/ReceivingStock");
 router.post("/ReceivingStock/add", addReceivingStock)
 router.get("/ReceivingStock/get", getReceivingStock);
+router.get("/ReceivingStock/search", getReceivingStockBySearch);
+router.put("/ReceivingStock/update/:Id", updateReceivingStock);
+router.delete("/ReceivingStock/delete/:Id", deleteReceivingStock);
 
 // Damaged Material
 const { addDamagedMaterial, getDamagedMaterial } = require("../controllers/DamagedMaterial");
