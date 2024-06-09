@@ -96,13 +96,14 @@ const {
   addKindOfRoom,
   updateKindOfRoom,
   deleteKindOfRoom,
+  getKindOfRoomBySearch
 } = require("../controllers/Rooms");
 //KindOfRoom 
 router.get("/KindOfRoom/getKindOfRoom", getAllKindOfRoom);
 router.post("/KindOfRoom/add", addKindOfRoom);
 router.put("/KindOfRoom/update/:kindofroomId", updateKindOfRoom);
 router.delete("/KindOfRoom/delete/:kindofroomId", deleteKindOfRoom);
-
+router.get("/KindOfRoom/KindOfRoom", getKindOfRoomBySearch);
 
 //Floor 
 const {

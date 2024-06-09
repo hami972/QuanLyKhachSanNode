@@ -21,7 +21,7 @@ const getAllBills = async (req, res) => {
       const docId = doc.id;
       return { ...data, Id: docId };
     });
-    const newList = list.sort((a, b) => a.maHoaDon.localeCompare(b.maHoaDon));
+    const newList = list.sort((a, b) => a.tenKhachHang.localeCompare(b.tenKhachHang));
     res.json({ success: true, bills: newList });
   } catch (error) {
     res.status(500).json({
@@ -113,8 +113,8 @@ const getBillsBySearch = async (req, res) => {
       const matchMaHoaDon =
         maHoaDon === "" ||
         normalizeText(hoadon.maHoaDon).includes(normalizeText(maHoaDon));
-      const matchTenKhachHang =
-        tenBenhNhan === "" ||
+      const matchtenKhachHang =
+        tenKhachHang === "" ||
         normalizeText(hoadon.tenKhachHang).includes(normalizeText(tenKhachHang));
       const matchNgayLap =
         ngayLap === "" || compareDates(ngayLap, hoadon.ngayLap) == 0;
@@ -128,7 +128,7 @@ const getBillsBySearch = async (req, res) => {
       );
     });
     const sortList = searchResults.sort((a, b) =>
-      a.maHoaDon.localeCompare(b.maHoaDon)
+      a.tenKhachHang.localeCompare(b.tenKhachHang)
     );
     res.json({ success: true, bills: sortList });
   } catch (error) {

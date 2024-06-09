@@ -82,10 +82,58 @@ const getAllKindOfRoom = async (req, res) => {
       });
     }
   };
+  const getKindOfRoomBySearch = async (req, res) => {
+    const { maLoaiPhong, tenLoaiPhong, soLuongNguoiToiDa, viewPhong, chiNhanh } = req.query;
+    const myCollection = collection(firestore, "LoaiPhong");
+    try {
+      const querySnapshot = await getDocs(myCollection);
+      const list = querySnapshot.docs.map((doc) => {
+        const data = doc.data();
+        const docId = doc.id;
+        return { ...data, Id: docId };
+      });
+      const searchResults = list.filter((phong) => {
+        const normalizeText = (text) => text.toLowerCase();
+        console.log("abc");
+        const matchChiNhanh = chiNhanh===""||chiNhanh==="Tất cả"|| normalizeText(vatTu.chiNhanh).includes(normalizeText(chiNhanh));
+        const matchmaLoaiPhong =
+        maLoaiPhong === "" ||
+          normalizeText(phong.maLoaiPhong).includes(normalizeText(maLoaiPhong));
+        const matchtenLoaiPhong =
+        tenLoaiPhong === "" ||
+          normalizeText(phong.tenLoaiPhong).includes(normalizeText(tenLoaiPhong));
+        const matchsoLuongNguoiToiDa =
+        soLuongNguoiToiDa === "" ||
+          normalizeText(phong.soLuongNguoiToiDa).includes(normalizeText(soLuongNguoiToiDa));
+        const matchviewPhong =
+        viewPhong === "" ||
+          normalizeText(phong.viewPhong).includes(normalizeText(viewPhong));
+          return (
+            matchmaLoaiPhong &&
+            matchtenLoaiPhong &&
+            matchsoLuongNguoiToiDa &&
+            matchviewPhong &&
+            matchChiNhanh
+          );
+      });
+      const sortList = searchResults.sort((a, b) =>
+        a.maLoaiPhong.localeCompare(b.maLoaiPhong)
+      );
+      res.json({ success: true, kindOfRoom: sortList });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: "something went wrong when get data from HoaDon",
+      });
+      console.log(error);
+      return [];
+    }
+  };
   module.exports = {
     getAllKindOfRoom,
     addKindOfRoom,
     updateKindOfRoom,
     deleteKindOfRoom,
+    getKindOfRoomBySearch,
   };
   
