@@ -69,4 +69,86 @@ const deleteBlock = async (req, res) => {
     }
 };
 
-module.exports = { addBlock, getAllBlocks, updateBlock, deleteBlock }
+const getBlocksBySearch = async (req, res) => {
+    const {
+        maToa,
+        tenToa,
+        slPhongDau,
+        slPhongCuoi,
+        slTangDau,
+        slTangCuoi,
+        chiNhanh
+    } = req.query;
+    const myCollection = collection(firestore, 'Toa');
+    try {
+        const querySnapshot = await getDocs(myCollection);
+        const list = querySnapshot.docs.map((doc) => {
+            const data = doc.data();
+            const docId = doc.id;
+            return { ...data, Id: docId };
+        });
+        const searchResults = list.filter(toa => {
+            const normalizeText = (text) => text.toLowerCase();
+            const matchChiNhanh = normalizeText(toa.chiNhanh).includes(normalizeText(chiNhanh));
+            const matchMaToa =
+                maToa === "" ||
+                normalizeText(toa.maToa).includes(normalizeText(maToa));
+            const matchTenToa =
+                tenToa === "" ||
+                normalizeText(toa.tenToa).includes(normalizeText(tenToa));
+
+            const matchSoLuongPhong =
+                (slPhongDau == "" && slPhongCuoi == "") ||
+                (slPhongDau != "" &&
+                    parseFloat(toa.tang.reduce((total, tang) => total + (tang.dsPhong ? tang.dsPhong.split('-').length : 0), 0))
+                    >= parseFloat(slPhongDau) &&
+                    slPhongCuoi == "") ||
+                (slPhongCuoi != "" &&
+                    parseFloat(toa.tang.reduce((total, tang) => total + (tang.dsPhong ? tang.dsPhong.split('-').length : 0), 0))
+                    <= parseFloat(slPhongCuoi) &&
+                    slPhongDau == "") ||
+                (slPhongDau != "" &&
+                    slPhongCuoi != "" &&
+                    parseFloat(toa.tang.reduce((total, tang) => total + (tang.dsPhong ? tang.dsPhong.split('-').length : 0), 0))
+                    >= parseFloat(slPhongDau) &&
+                    parseFloat(toa.tang.reduce((total, tang) => total + (tang.dsPhong ? tang.dsPhong.split('-').length : 0), 0))
+                    <= parseFloat(slPhongCuoi));
+
+            const matchSoLuongTang =
+                (slTangDau == "" && slTangCuoi == "") ||
+                (slTangDau != "" &&
+                    parseFloat(toa.tang.length) >= parseFloat(slTangDau) &&
+                    slTangCuoi == "") ||
+                (slTangCuoi != "" &&
+                    parseFloat(toa.tang.length) <= parseFloat(toa.tang.length) &&
+                    slTangDau == "") ||
+                (slTangDau != "" &&
+                    slTangCuoi != "" &&
+                    parseFloat(toa.tang.length) >= parseFloat(toa.tang.length) &&
+                    parseFloat(toa.tang.length) <= parseFloat(toa.tang.length));
+
+            return (
+                matchMaToa &&
+                matchTenToa &&
+                matchSoLuongPhong &&
+                matchSoLuongTang &&
+                matchChiNhanh
+            );
+        });
+        const sortList = searchResults.sort((a, b) =>
+            a.maToa.localeCompare(b.maToa)
+        );
+        res.json({ success: true, list: sortList });
+    } catch (error) {
+        res
+            .status(500)
+            .json({
+                success: false,
+                message: "something went wrong when get data from VatTu",
+            });
+        console.log(error);
+        return [];
+    }
+};
+
+module.exports = { addBlock, getAllBlocks, updateBlock, deleteBlock, getBlocksBySearch }
