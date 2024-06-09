@@ -84,10 +84,10 @@ const getReceivingStockBySearch = async (req, res) => {
                 (giaNhapDau == "" && giaNhapCuoi == "") ||
                 (giaNhapDau != "" &&
                     parseFloat(csvc.giaNhap) >= parseFloat(giaNhapDau) &&
-                    giaNhaCuoi == "") ||
+                    giaNhapCuoi == "") ||
                 (giaNhapCuoi != "" &&
                     parseFloat(csvc.giaNhap) <= parseFloat(giaNhapCuoi) &&
-                    giaNhaDau == "") ||
+                    giaNhapDau == "") ||
                 (giaNhapDau != "" &&
                     giaNhapCuoi != "" &&
                     parseFloat(csvc.giaNhap) >= parseFloat(giaNhapDau) &&
