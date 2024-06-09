@@ -176,9 +176,13 @@ router.put("/ReceivingStock/update/:Id", updateReceivingStock);
 router.delete("/ReceivingStock/delete/:Id", deleteReceivingStock);
 
 // Damaged Material
-const { addDamagedMaterial, getDamagedMaterial } = require("../controllers/DamagedMaterial");
+const { addDamagedMaterial, getDamagedMaterial, getDamagedMaterialBySearch, deleteDamagedMaterial, updateDamagedMaterial } =
+  require("../controllers/DamagedMaterial");
 router.post("/DamagedMaterial/add", addDamagedMaterial)
 router.get("/DamagedMaterial/get", getDamagedMaterial);
+router.put("/DamagedMaterial/update/:Id", updateDamagedMaterial);
+router.delete("/DamagedMaterial/delete/:Id", deleteDamagedMaterial);
+router.get("/DamagedMaterial/search", getDamagedMaterialBySearch);
 
 const {
   getWashingMachine,
