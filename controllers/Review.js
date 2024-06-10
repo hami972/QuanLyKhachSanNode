@@ -32,6 +32,26 @@ const getAllReview = async (req, res) => {
     return [];
   }
 };
+const getCPHD = async (req, res) => {
+  const myCollection = collection(firestore, "CPHD");
+  try {
+    const querySnapshot = await getDocs(myCollection);
+    const list = querySnapshot.docs.map((doc) => {
+      const data = doc.data();
+      const docId = doc.id;
+      return { ...data, Id: docId };
+    });
+    const newList = list.sort((a, b) => a.ten.localeCompare(b.ten));
+    res.json({ success: true, cphd: newList });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "something went wrong when get data from CPHD",
+    });
+    console.log(error);
+    return [];
+  }
+};
 const addReview = async (req, res) => {
   try {
     const myCollection = collection(firestore, "DanhGia");
@@ -87,4 +107,5 @@ module.exports = {
   addReview,
   updateReview,
   deleteReview,
+  getCPHD,
 };

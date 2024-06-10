@@ -138,9 +138,11 @@ const {
   addReview,
   updateReview,
   deleteReview,
+  getCPHD,
 } = require("../controllers/Review");
 //Review 
 router.get("/Review/getReview", getAllReview);
+router.get("/CPHD/getCPHD", getCPHD);
 router.post("/Review/add", addReview);
 router.put("/Review/update/:reviewId", updateReview);
 router.delete("/Review/delete/:reviewId", deleteReview);
